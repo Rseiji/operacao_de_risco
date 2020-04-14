@@ -52,6 +52,7 @@ def get_plot_ilumination():
     return x_axis, y_axis
 
 
-
+def get_plot_ilumination_2(initial_time, final_time):
+    x_axis - labsoft_
 
 

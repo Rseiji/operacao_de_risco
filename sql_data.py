@@ -8,11 +8,11 @@ class Postgre:
 
 
     def connect(self):
-        connection = psycopg2.connect(user="postgres",
-                                      password="friend91",
-                                      host="127.0.0.1",
+        connection = psycopg2.connect(user="aluno",
+                                      password="labsoft",
+                                      host="143.107.102.7",
                                       port="5432",
-                                      database="postgres")
+                                      database="medicoes")
         cursor = connection.cursor()
         return connection, cursor
 
@@ -34,6 +34,7 @@ class Postgre:
         return table_labsoft, table_labprog
 
 
+           
 if __name__ == '__main__':
     sql = Postgre()
 
