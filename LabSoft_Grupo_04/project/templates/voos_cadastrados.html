@@ -1,0 +1,48 @@
+{% extends 'layout.html' %}
+{% block content %}
+        
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-2 col-lg-3"></div>
+                
+                <div class="col-md-8 col-lg-6" id="container-table">
+                    <div class="table-responsive">
+                            {% for voo in voos %}
+                            <h1><a class="article-title" id="content-title" href="{{ url_for('visualizar_voo', voo_id=voo.voo_id) }}">Voo {{ voo.voo_id }}</a></h1>
+                        <table class="table table-hover"> 
+                            <tbody>
+                                    <tr>
+                                        <th id="table-border">Aluno: </th>
+                                        <td id="table-border">{{ voo.aluno.nome }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th id="table-border">data</th>
+                                        <td id="table-border">{{ voo.dataVoo.strftime('%d/%m/%Y') }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th id="table-border">Início: </th>
+                                        <td id="table-border">{{ voo.horaSaida }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th id="table-border">Duração: </th>
+                                        <td id="table-border">{{ voo.duracaoVoo }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th id="table-border">Parecer: </th>
+                                        <td id="table-border">{{ voo.parecer }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th id="table-border">Instrutor: </th>
+                                        <td id="table-border">{{ voo.instrutor.nome }}</td>
+                                    </tr>
+                            </tbody>
+                        </table>
+                        {% endfor %}
+                    </div>
+                </div>
+                
+                <div class="col-md-2 col-lg-3"></div>
+            </div>
+        </div>
+
+{% endblock content %}

@@ -1,0 +1,89 @@
+{% extends 'layout.html' %}
+{% block content %}
+    <div class="container">
+        <div class="content-section">
+            <form method="POST" action="">
+                {{ form.hidden_tag() }}
+                <fieldset class="form-group">
+                    <legend class="border-bottom mb-4">{{ legend }}</legend>
+                    <div class="form-group">
+                        {{ form.aluno.label(class="form-control-label") }}
+                        {% if form.aluno.errors %}
+                            {{ form.aluno(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.aluno.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.aluno(class="form-control form-control-lg") }}
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        {{ form.horaSaida.label(class="form-control-label") }}
+
+                        {% if form.horaSaida.errors %}
+                            {{ form.horaSaida(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.horaSaida.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.horaSaida(class="form-control form-control-lg") }}
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        {{ form.duracaoVoo.label(class="form-control-label") }}
+                        {% if form.duracaoVoo.errors %}
+                            {{ form.duracaoVoo(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.duracaoVoo.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.duracaoVoo(class="form-control form-control-lg") }}
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        {{ form.parecer.label(class="form-control-label") }}
+                        {% if form.parecer.errors %}
+                            {{ form.parecer(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.parecer.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.parecer(class="form-control form-control-lg") }}
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        {{ form.instrutor.label(class="form-control-label") }}
+                        {% if form.instrutor.errors %}
+                            {{ form.instrutor(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.instrutor.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.instrutor(class="form-control form-control-lg") }}
+                        {% endif %}
+                    </div>
+                </fieldset>
+                <div class="form-group">
+                    {{ form.submit(class="btn btn-outline-dark") }}
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        let input_saida = document.querySelector('#horaSaida');
+        input_saida.type = 'time';
+        let input_duracao = document.querySelector('#duracaoVoo');
+        input_duracao.type = 'time';
+    </script>
+{% endblock content %}

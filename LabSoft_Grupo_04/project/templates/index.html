@@ -1,0 +1,111 @@
+{% extends "layout.html" %}
+
+{% block custom_css %}
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='grid.css') }}">
+{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <h1>Bem vindo!</h1>
+    <p class="lead">Aqui você encontra as principais informações sobre seu progresso no curso.</p>
+
+    <hr />
+    {% if current_user.is_authenticated %}
+      {% if current_user.usuario_id %}
+            <h2>Dashboard aluno</h2>
+
+            
+            <div class="row mb-3">
+              <div class="col-sm-12 pb-3">
+                <h4>Progresso geral do curso</h4>
+              </div>
+              <div class="row col-sm-12">
+                <div id="payment" class="col-md-2 themed-grid-col border-left-grid past-active">Pagamento do curso</div>
+                <div id="seta1" class="col-md-1 themed-grid-col past-active">&rarr;</div>
+                <div id="voo_monitorado" class="col-md-2 themed-grid-col">Voo monitorado</div>
+                <div id="seta2" class="col-md-1 themed-grid-col">&rarr;</div>
+                <div id="voo_solo" class="col-md-2 themed-grid-col">Voo solo</div>
+                <div id="seta3" class="col-md-1 themed-grid-col">&rarr;</div>
+                <div id="emitir_breve" class="col-md-2 themed-grid-col">Emitir Brevê</div>
+                <div class="col-md-1 themed-grid-col border-right-grid">&#9992;</div>
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <div class="col-6">
+                <div class="row mb-10">
+                  <div class="col-12 space">
+                    {% if current_user.is_authenticated and current_user.usuario_id %}
+                    <h5>Pagamento do curso</h5>
+                    <p class="lead">Status: <span class="active">pago</span></p>
+                  </div>
+                  <hr />
+                  <div class="col-12 space">
+                    <h5>Horas de voo solo</h5>
+                    {% if current_user.horas_de_voo < 30*340 %}
+                    <div>0</div>
+                    <div class="progress">
+                      <div class="progress-bar bg-danger" role="progressbar" style="width: 5%" aria-valuenow="0" aria-valuemin="5" aria-valuemax="100">0%</div>
+                      {% else %}
+                      <div>{{current_user.horas_de_voo//60 - 340}}</div>
+                      <div class="progress">
+                      <div class="progress-bar bg-danger" role="progressbar" style="width: 5%" aria-valuenow="0" aria-valuemin="5" aria-valuemax="100">{{current_user.horas_de_voo*100//60//340 - 340}}</div>
+                      {% endif %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            
+      <div class="col-6 ">
+        <div class="row mb-2">
+          <div class="col-12 space">
+            <h5>Horas de voo monitoradas</h5>
+            <div><p>{{current_user.horas_de_voo//60}} de 340 horas totais</p> </div>
+            <div class="progress">
+              <div class="progress-bar" role="progressbar" style="width: 15%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">{{current_user.horas_de_voo*100//60//340}} %</div>
+            </div>
+          </div>
+                  <hr />
+                  <div class="col-12 space">
+                    <h5>Emitir Brevê</h5>
+                    {% if current_user.horas_de_voo > 60*340 %}
+                    <p class="fade-out">Viavel</p>
+                    {% else %}
+                    <p class="fade-out">Inviavel</p>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            </div>
+  {% endif %}
+
+
+
+            <hr />
+      {% elif current_user.breve %}
+              <h2>Dashboard instrutor</h2>
+              <p class="lead">Status: <span class="active">ativo</span></p>
+
+              <div class="row mb-3">
+                <div class="col-6">
+                  <h5>Próximas aulas:</h5>
+
+                  {% for voo in voos %}
+                    {% if voo.instrutor.nome == usuario.nome %}
+                          <div class="container">
+                            <p class="lead">Aluno: Daniel
+                              <br>Data: {{ voo.dataVoo.strftime('%d/%m/%Y') }}
+                              <br>Horário: {{ voo.horaSaida }}
+                              <br>Duração: {{ voo.duracaoVoo }}</p>
+                          </div>
+                    {% endif %}
+                 {% endfor %}
+                </div>
+                    
+              </div>
+      {% endif %}
+  </div>
+
+    
+{% endif %}
+{% endblock %}

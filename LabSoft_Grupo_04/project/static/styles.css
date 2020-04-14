@@ -1,0 +1,48 @@
+body {
+    background-color: beige;
+}
+
+#topo-da-pagina {
+    background-color: darkkhaki;
+    /*padding-bottom: 20px;
+    padding-top: 15px;
+    box-shadow:0px 0px 10px 5px #999;*/
+
+}
+
+#title_page {
+    font-family: 'Stylish', sans-serif;
+    /*font-family: 'Gloria Hallelujah', cursive;*/
+}
+
+#content-title {
+    font-family: 'Stylish', sans-serif;
+    color: black !important;
+    /*font-family: 'Gloria Hallelujah', cursive;*/
+}
+
+table {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+    margin: auto;
+}
+
+#button-font {
+    font-family: 'Montserrat', sans-serif;
+}
+
+td {
+    text-align:right;
+}
+
+#table-border {
+    border-bottom: 1px solid #BFBFBF;
+    border-top: 1px solid #BFBFBF;
+}
+
+.form-signin {
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: auto;
+}

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+
+  <!--Font do google fonts-->
+  <link href="https://fonts.googleapis.com/css?family=Stylish&display=swap" rel="stylesheet">
+  <!--
+  <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+
+  -->
+
+  {% block custom_css %}{% endblock %}
+
+
+  <meta charset="UTF-8">
+  {% if title %}
+    <title>{{ title }}</title>
+  {% else %}
+    <title>Escola de Aviação - PCS3443 - Grupo 4</title>
+  {% endif %}
+
+  <script>
+    function changePassword() {
+      var x = document.getElementById("senhaNova");
+        if (x.style.display === "none") {
+          x.style.display = "block";
+        } else {
+          x.style.display = "none";
+        }
+    }
+
+    function choosePage() { //escolhe qual a aba selecionada e atribui class active a ela no botão do btn group
+      let x = document.getElementsByClassName("title").innerText;
+        let y = document.querySelectorAll("a.btn-warning");
+        for(let j = 0; j < y.length;j++) {
+            if(x == )
+              y[j].classList.add('active');
+        }
+    }
+
+  </script>
+
+</head>
+
+<body onbeforeunload="return choosePage()">
+  <nav id="topo-da-pagina" class="navbar navbar-expand-md" style="box-shadow:0px 0px 10px 5px #999;">
+    <a id="title_page" class="navbar-brand" href="{{ url_for('home') }}" style="color: black; font-weight: bold; font-style: italic;">Escola de voo do grupo 4</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="content-title" class="collapse navbar-collapse" id="navbarsExample04">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="{{ url_for('home') }}" style="color: black;">Home <span class="sr-only">(current)</span></a>
+        </li>
+        {% if current_user.is_authenticated %}
+          {% if current_user.usuario_id %}
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="Voos" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: black;">{{ current_user.nome }}</a>
+              <div class="dropdown-menu" aria-labelledby="dropdown04">
+                <a class="dropdown-item" href="{{ url_for('visualizar_aluno', usuario_id = current_user.usuario_id) }}" style="color: black;">Dados Cadastrais</a>
+                <a class="dropdown-item" href="{{ url_for('historico_voos') }}" style="color: black;">Histórico de Voos</a>
+              </div>
+            </li>
+          {% elif current_user.breve %}
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="Voos" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: black;">{{ current_user.nome }}</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown04">
+              <a class="dropdown-item" href="{{ url_for('visualizar_instrutor', breve = current_user.breve) }}" style="color: black;">Dados Cadastrais</a>
+              <a class="dropdown-item" href="{{ url_for('voos_monitorados') }}" style="color: black;">Voos Monitorados</a>
+              <a class="dropdown-item" href="{{ url_for('cadastrar_voo') }}" style="color: black;">Cadastrar Voo</a>
+            </div>
+          </li>
+          {% elif current_user.admin_id %}
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="Voos" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: black;">Voos</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown04">
+              <a class="dropdown-item" href="{{ url_for('listar_voos') }}" style="color: black;">Voos Cadastrados</a>
+              <a class="dropdown-item" href="{{ url_for('cadastrar_voo') }}" style="color: black;">Cadastrar Voo</a>
+            </div>
+          </li>
+          <!--
+          <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="Usuarios" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: black;">Usuarios</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown04">
+              <a class="dropdown-item" href="{{ url_for('listar_usuarios') }}" style="color: black;">Usuarios Cadastrados</a>
+              <a class="dropdown-item" href="{{ url_for('cadastrar_usuario') }}" style="color: black;">Cadastrar Usuarios</a>
+            </div>
+          </li> -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="Alunos" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: black;">Alunos</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown04">
+              <a class="dropdown-item" href="{{ url_for('listar_alunos') }}" style="color: black;">Alunos Cadastrados</a>
+              <a class="dropdown-item" href="{{ url_for('cadastrar_aluno') }}" style="color: black;">Cadastrar Aluno</a>
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="Instrutores" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: black;">Instrutores</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown04">
+              <a class="dropdown-item" href="{{ url_for('listar_instrutores') }}" style="color: black;">Instrutores Cadastrados</a>
+              <a class="dropdown-item" href="{{ url_for('cadastrar_instrutor') }}" style="color: black;">Cadastrar Instrutor</a>
+            </div>
+          </li>
+        {% endif %}
+        {% endif %}
+        {% if current_user.is_authenticated %}
+         <a class="nav-item nav-link" href="{{ url_for('logout') }}" style="color: black;">Logout</a>
+        {% else %}
+         <a class="nav-item nav-link" href="{{ url_for('login') }}" style="color: black;">Login</a>
+        {% endif %}
+      </ul>
+
+      <form class="form-inline my-2 my-md-0">
+        <input class="form-control mr-sm-2" type="text" placeholder="Pesquisar no site">
+        <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Pesquisar</button>
+      </form>
+    </div>
+  </nav>
+
+  <!--
+        <div class="container-fluid" id="topo-da-pagina">
+            <h1 id="title_page" style="margin-bottom: 20px">Escola de voo do grupo 4</h1>
+            <div class="btn-group d-flex flex-wrap rounded shadow" role="group" id="button-font">
+                <a href="{{ url_for('home') }}" class="btn btn-warning" role="button">Página Principal</a>
+                <a href="{{ url_for('listar_voos') }}" class="btn btn-warning" role="button">Voos Cadastrados</a>
+                <a href="{{ url_for('listar_alunos') }}" class="btn btn-warning" role="button">Alunos Cadastrados</a>
+                <a href="{{ url_for('cadastrar_voo') }}" class="btn btn-warning" role="button">Cadastrar Voo</a>
+                <a href="{{ url_for('listar_alunos') }}" class="btn btn-warning" role="button">Cadastrar Aluno</a>
+            </div>
+        </div>
+-->
+    <div style="margin-top:30px"></div>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, message in messages %}
+              <div class="alert alert-{{ category }}">
+                  {{ message }}
+              </div>
+          {% endfor %}
+        {% endif %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+
+    <footer class="footer mt-auto py-3">
+      <div class="container">
+        <p class="text-muted text-center">2019 - Grupo 4 - Turma 1 - Laboratório de Software (PCS3434) - Escola Politécnica da USP</p>
+      </div>
+    </footer>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>

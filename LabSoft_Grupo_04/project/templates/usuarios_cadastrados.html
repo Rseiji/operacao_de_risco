@@ -1,0 +1,39 @@
+{% extends 'layout.html' %}
+{% block content %}
+        <div class="container-fluid">
+            <h3 style="margin-top: 40px; margin-bottom: 30px" id="content-title">Usuários cadastrados no sistema: </h3>
+        </div>
+        
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-2 col-lg-3"></div>
+                
+                <div class="col-md-8 col-lg-6" id="container-table">
+                    <div class="table-responsive">
+                            {% for usuario in usuarios %}
+                            <h1><a class="article-title" id="content-title" href="{{ url_for('visualizar_usuario', usuario_id=usuario.usuario_id) }}">Usuario {{ usuario.usuario_id }}</a></h1>
+                        <table class="table table-hover"> 
+                            <tbody>
+                                    <tr>
+                                        <th id="table-border">Nome: </th>
+                                        <td id="table-border">{{ usuario.nome }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th id="table-border">CPF: </th>
+                                        <td id="table-border">{{ usuario.cpf }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th id="table-border">Email: </th>
+                                        <td id="table-border">{{ usuario.email }}</td>
+                                    </tr>
+                            </tbody>
+                        </table>
+                        {% endfor %}
+                    </div>
+                </div>
+                
+                <div class="col-md-2 col-lg-3"></div>
+            </div>
+        </div>
+
+{% endblock content %}
